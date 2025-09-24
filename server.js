@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const mongoose = require('mongoose');
 require('dotenv').config(); // Load environment variables from .env file
+const { v4: uuidv4 } = require('uuid'); // To generate unique IDs
 const path = require('path');
 const fs = require('fs').promises; // Using promises version of fs for async operations
 const cheerio = require('cheerio'); // HTML parser
@@ -11,38 +11,32 @@ const app = express();
 const PORT = process.env.PORT || 3000; // Use port from environment variable or default to 3000
 
 // --- Database Connection ---
-const MONGO_URI = process.env.MONGO_URI;
+const DB_PATH = path.join(__dirname, 'database.json');
 
-mongoose.connect(MONGO_URI, { dbName: 'exam-prep-hub', tls: true })
-    .then(() => console.log('Successfully connected to MongoDB Atlas!'))
-    .catch(error => console.error('Error connecting to MongoDB:', error));
+// --- JSON Database Helper Functions ---
+const readDb = async () => {
+    try {
+        const data = await fs.readFile(DB_PATH, 'utf-8');
+        return JSON.parse(data);
+    } catch (error) {
+        // If the file doesn't exist or is invalid, return a default structure
+        console.error("Could not read database.json, returning default structure.", error);
+        return { users: [], content: [], admin: { password: process.env.ADMIN_PASSWORD } };
+    }
+};
 
-// --- User Schema and Model ---
-const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now }
-});
-
-const User = mongoose.model('User', userSchema);
-
-// --- Content Schema and Model ---
-const contentSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    type: { type: String, required: true, enum: ['book', 'video'] }, // e.g., book, video
-    exam: { type: String, required: true }, // e.g., upsc, cds
-    url: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now }
-});
-const Content = mongoose.model('Content', contentSchema);
+const writeDb = async (data) => {
+    // NOTE: This simple write operation is not safe for concurrent requests.
+    // In a high-traffic environment, this could lead to data loss or corruption.
+    await fs.writeFile(DB_PATH, JSON.stringify(data, null, 4), 'utf-8');
+};
 
 // --- One-Time Database Seeding from HTML files ---
 const seedDatabase = async () => {
     try {
+        const db = await readDb();
         // Check if content already exists to prevent re-seeding
-        const existingContentCount = await Content.countDocuments();
-        if (existingContentCount > 0) {
+        if (db.content.length > 0) {
             console.log('Content collection is not empty. Skipping seeding.');
             return;
         }
@@ -71,6 +65,7 @@ const seedDatabase = async () => {
                     const title = $(el).find('h3').text().trim();
                     const author = $(el).find('p').text().trim();
                     contentToInsert.push({
+                        id: uuidv4(),
                         title: `${title} - ${author}`,
                         type: 'book',
                         exam: exam,
@@ -98,6 +93,7 @@ const seedDatabase = async () => {
                 if (url) {
                     const videoTitle = $(el).find('p').text().trim(); // "Video 1"
                     contentToInsert.push({
+                        id: uuidv4(),
                         title: `${subject} - ${videoTitle}`,
                         type: 'video',
                         exam: exam,
@@ -111,7 +107,8 @@ const seedDatabase = async () => {
         const uniqueContent = Array.from(new Map(contentToInsert.map(item => [item['url'], item])).values());
 
         if (uniqueContent.length > 0) {
-            await Content.insertMany(uniqueContent);
+            db.content = uniqueContent;
+            await writeDb(db);
             console.log(`Successfully seeded ${uniqueContent.length} content items into the database.`);
         } else {
             console.log('No new content found to seed.');
@@ -122,19 +119,14 @@ const seedDatabase = async () => {
     }
 };
 
-// Run seeding after DB connection is established
-mongoose.connection.once('open', () => {
-    // We need to install cheerio and glob first.
-    // I'll assume they are installed for this script to work.
-    // You can install them with: npm install cheerio glob
-    try {
-        require.resolve('cheerio');
-        require.resolve('glob');
-        seedDatabase();
-    } catch (e) {
-        console.warn('Skipping DB seeding. Please run "npm install cheerio glob" to enable it.');
-    }
-});
+// Run seeding after DB connection and sync is established
+try {
+    require.resolve('cheerio');
+    require.resolve('glob');
+    seedDatabase();
+} catch (e) {
+    console.warn('Skipping DB seeding. Please run "npm install cheerio glob" to enable it.');
+}
 
 // Middleware to parse JSON bodies and serve static files
 app.use(express.json());
@@ -155,8 +147,10 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ message: 'Please provide all required fields.' });
         }
 
+        const db = await readDb();
+
         // Check if user already exists in the database
-        const existingUser = await User.findOne({ email: email });
+        const existingUser = db.users.find(user => user.email === email);
         if (existingUser) {
             return res.status(409).json({ message: 'User with this email already exists.' });
         }
@@ -165,15 +159,17 @@ app.post('/api/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // --- Store the New User in the Database ---
-        const newUser = new User({
+        const newUser = {
+            id: uuidv4(),
             name,
             email,
             password: hashedPassword, // Store the hashed password, NOT the original
-        });
-        await newUser.save();
+            createdAt: new Date().toISOString()
+        };
+        db.users.push(newUser);
+        await writeDb(db);
 
-        console.log('New user registered and saved to DB:', { id: newUser._id, name: newUser.name, email: newUser.email });
-
+        console.log('New user registered and saved to DB:', { id: newUser.id, name: newUser.name, email: newUser.email });
         // Send a success response
         res.status(201).json({ message: 'User registered successfully!' });
     } catch (error) {
@@ -192,8 +188,9 @@ app.post('/api/login', async (req, res) => {
             return res.status(400).json({ message: 'Please provide email and password.' });
         }
 
+        const db = await readDb();
         // --- Find User in Database ---
-        const user = await User.findOne({ email });
+        const user = db.users.find(u => u.email === email);
         if (!user) {
             // Use a generic message to prevent email enumeration
             return res.status(401).json({ message: 'Invalid credentials.' });
@@ -223,28 +220,23 @@ app.get('/api/users', async (req, res) => {
         const skip = (page - 1) * limit;
         const searchQuery = req.query.search || '';
 
-        const filter = {};
+        const db = await readDb();
+        let filteredUsers = db.users;
+
         if (searchQuery) {
-            // Create a filter that searches name OR email case-insensitively
-            filter.$or = [
-                { name: { $regex: searchQuery, $options: 'i' } },
-                { email: { $regex: searchQuery, $options: 'i' } }
-            ];
+            const lowercasedQuery = searchQuery.toLowerCase();
+            filteredUsers = db.users.filter(user =>
+                user.name.toLowerCase().includes(lowercasedQuery) ||
+                user.email.toLowerCase().includes(lowercasedQuery)
+            );
         }
 
-        let query = User.find(filter, '_id name email createdAt').sort({ createdAt: -1 });
-
-        // If limit is not 0, apply pagination. Otherwise, fetch all.
-        if (limit !== 0) {
-            query = query.skip(skip).limit(limit);
-        }
-
-        const users = await query;
-        const totalUsers = await User.countDocuments(filter); // Count only filtered users
+        const totalUsers = filteredUsers.length;
+        const paginatedUsers = limit === 0 ? filteredUsers : filteredUsers.slice(skip, skip + limit);
 
         res.status(200).json({
-            users,
-            totalPages: Math.ceil(totalUsers / limit)
+            users: paginatedUsers.map(({ password, ...user }) => user), // Exclude password from response
+            totalPages: limit === 0 ? 1 : Math.ceil(totalUsers / limit)
         });
     } catch (error) {
         console.error('Server error fetching users:', error);
@@ -260,11 +252,13 @@ app.get('/api/user', async (req, res) => {
             return res.status(400).json({ message: 'Email query parameter is required.' });
         }
 
-        const user = await User.findOne({ email }, '_id name email'); // Find user by email
+        const db = await readDb();
+        const user = db.users.find(u => u.email === email);
+
         if (!user) {
             return res.status(404).json({ message: 'User not found.' });
         }
-        res.status(200).json(user);
+        res.status(200).json({ id: user.id, name: user.name, email: user.email });
     } catch (error) {
         res.status(500).json({ message: 'An internal server error occurred.' });
     }
@@ -280,15 +274,18 @@ app.put('/api/users/:id', async (req, res) => {
             return res.status(400).json({ message: 'Name and email are required.' });
         }
 
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            { name, email },
-            { new: true } // Return the updated document
-        );
+        const db = await readDb();
+        const userIndex = db.users.findIndex(u => u.id === userId);
 
-        if (!updatedUser) return res.status(404).json({ message: 'User not found.' });
+        if (userIndex === -1) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
 
-        res.status(200).json({ message: 'User updated successfully!', user: updatedUser });
+        db.users[userIndex] = { ...db.users[userIndex], name, email };
+        await writeDb(db);
+
+        const { password, ...userToReturn } = db.users[userIndex];
+        res.status(200).json({ message: 'User updated successfully!', user: userToReturn });
     } catch (error) {
         res.status(500).json({ message: 'An internal server error occurred.' });
     }
@@ -298,12 +295,16 @@ app.put('/api/users/:id', async (req, res) => {
 app.delete('/api/users/:id', async (req, res) => {
     try {
         const userId = req.params.id;
-        const deletedUser = await User.findByIdAndDelete(userId);
+        const db = await readDb();
+        const initialLength = db.users.length;
 
-        if (!deletedUser) {
+        db.users = db.users.filter(u => u.id !== userId);
+
+        if (db.users.length === initialLength) {
             return res.status(404).json({ message: 'User not found.' });
         }
 
+        await writeDb(db);
         res.status(200).json({ message: 'User deleted successfully!' });
     } catch (error) {
         res.status(500).json({ message: 'An internal server error occurred.' });
@@ -319,8 +320,9 @@ app.put('/api/user/change-password', async (req, res) => {
             return res.status(400).json({ message: 'Email, old password, and new password are required.' });
         }
 
+        const db = await readDb();
         // Find the user by email
-        const user = await User.findOne({ email });
+        const user = db.users.find(u => u.email === email);
         if (!user) {
             return res.status(404).json({ message: 'User not found.' });
         }
@@ -337,7 +339,7 @@ app.put('/api/user/change-password', async (req, res) => {
 
         // Update the user's password
         user.password = hashedPassword;
-        await user.save();
+        await writeDb(db);
 
         res.status(200).json({ message: 'Password changed successfully!' });
     } catch (error) {
@@ -353,15 +355,16 @@ app.post('/api/admin-login', async (req, res) => {
             return res.status(400).json({ message: 'Password is required.' });
         }
 
-        // Use environment variable for admin password
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+        const db = await readDb();
+        const adminPassword = db.admin.password || process.env.ADMIN_PASSWORD;
 
-        if (!ADMIN_PASSWORD) {
-            console.error('ADMIN_PASSWORD environment variable is not set.');
+        if (!adminPassword) {
+            console.error('Admin password is not set in database.json or ADMIN_PASSWORD environment variable.');
             return res.status(500).json({ message: 'Admin password not configured on server.' });
         }
 
-        if (password === ADMIN_PASSWORD) {
+        // For simplicity, this example uses a plain text password comparison for the admin.
+        if (password === adminPassword) {
             res.status(200).json({ message: 'Admin login successful!' });
         } else {
             res.status(401).json({ message: 'Incorrect admin password.' });
@@ -377,28 +380,22 @@ app.put('/api/admin/change-password', async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
 
-        // Use environment variable for admin password
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+        const db = await readDb();
+        const adminPassword = db.admin.password || process.env.ADMIN_PASSWORD;
 
-        if (!ADMIN_PASSWORD) {
-            console.error('ADMIN_PASSWORD environment variable is not set.');
+        if (!adminPassword) {
+            console.error('Admin password is not set in database.json or ADMIN_PASSWORD environment variable.');
             return res.status(500).json({ message: 'Admin password not configured on server.' });
         }
 
         // Verify the current password against the environment variable
-        if (currentPassword !== ADMIN_PASSWORD) {
+        if (currentPassword !== adminPassword) {
             return res.status(401).json({ message: 'Incorrect current password.' });
         }
 
-        // NOTE: Changing the admin password via API will only update it in the environment variable if the hosting platform supports it.
-        // For Render, you would typically update the environment variable directly in the Render dashboard.
-        // This API endpoint as written will NOT persist the new password across server restarts unless you manually update the env var on Render.
-        // For a more robust solution, you might store admin credentials in the database.
-        // Update the password in the config object and write it back to the file
-        // For now, we'll just acknowledge the change for the current session (not persistent on Render)
-        // If you want to make this persistent, you'd need to store it in your database or a secure secrets manager.
-        // For this example, we'll just return success, but be aware it's not persistent.
-        // process.env.ADMIN_PASSWORD = newPassword; // This would only affect the current running process, not persistent.
+        // Update the password in the JSON file
+        db.admin.password = newPassword;
+        await writeDb(db);
 
         res.status(200).json({ message: 'Admin password changed successfully!' });
 
@@ -411,12 +408,11 @@ app.put('/api/admin/change-password', async (req, res) => {
 // API Endpoint to get dashboard statistics
 app.get('/api/stats', async (req, res) => {
     try {
-        const userCount = await User.countDocuments();
-        // Get the count of distinct 'exam' fields from the Content collection
-        const distinctExams = await Content.distinct('exam');
-        const examCount = distinctExams.length;
-        const contentCount = await Content.countDocuments();
-
+        const db = await readDb();
+        const userCount = db.users.length;
+        const contentCount = db.content.length;
+        const examCount = new Set(db.content.map(item => item.exam)).size;
+        
         res.status(200).json({
             totalUsers: userCount,
             activeExams: examCount,
@@ -436,31 +432,31 @@ app.get('/api/content', async (req, res) => {
         let limit = parseInt(req.query.limit) || 10;
         const skip = (page - 1) * limit;
         const sortBy = req.query.sortBy || 'createdAt';
-        const sortOrder = req.query.sortOrder === 'asc' ? 1 : -1;
+        const sortOrder = req.query.sortOrder || 'desc';
         const searchQuery = req.query.search || '';
+        const type = req.query.type || '';
+        const exam = req.query.exam || '';
 
-        const sortOptions = {};
-        if (sortBy) {
-            sortOptions[sortBy] = sortOrder;
-        }
+        const db = await readDb();
+        let filteredContent = db.content;
 
-        const filter = {};
         if (searchQuery) {
-            // Case-insensitive search on the 'title' field
-            filter.title = { $regex: searchQuery, $options: 'i' };
+            const lowercasedQuery = searchQuery.toLowerCase();
+            filteredContent = filteredContent.filter(item => item.title.toLowerCase().includes(lowercasedQuery));
+        }
+        if (type) {
+            filteredContent = filteredContent.filter(item => item.type === type);
+        }
+        if (exam) {
+            filteredContent = filteredContent.filter(item => item.exam === exam);
         }
 
-        let query = Content.find(filter).sort(sortOptions);
+        const totalContent = filteredContent.length;
+        const paginatedContent = limit === 0 ? filteredContent : filteredContent.slice(skip, skip + limit);
 
-        if (limit !== 0) {
-            query = query.skip(skip).limit(limit);
-        }
-
-        const contentItems = await query;
-        const totalContent = await Content.countDocuments(filter);
         res.status(200).json({
-            content: contentItems,
-            totalPages: Math.ceil(totalContent / limit)
+            content: paginatedContent,
+            totalPages: limit === 0 ? 1 : Math.ceil(totalContent / limit)
         });
     } catch (error) {
         res.status(500).json({ message: 'An internal server error occurred.' });
@@ -470,7 +466,8 @@ app.get('/api/content', async (req, res) => {
 // GET single content item by ID
 app.get('/api/content/:id', async (req, res) => {
     try {
-        const contentItem = await Content.findById(req.params.id);
+        const db = await readDb();
+        const contentItem = db.content.find(item => item.id === req.params.id);
         if (!contentItem) {
             return res.status(404).json({ message: 'Content not found.' });
         }
@@ -487,8 +484,10 @@ app.post('/api/content', async (req, res) => {
         if (!title || !type || !exam || !url) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
-        const newContent = new Content({ title, type, exam, url });
-        await newContent.save();
+        const db = await readDb();
+        const newContent = { id: uuidv4(), title, type, exam, url };
+        db.content.push(newContent);
+        await writeDb(db);
         res.status(201).json({ message: 'Content added successfully!', content: newContent });
     } catch (error) {
         res.status(500).json({ message: 'An internal server error occurred.' });
@@ -498,6 +497,7 @@ app.post('/api/content', async (req, res) => {
 // POST bulk content
 app.post('/api/content/bulk', async (req, res) => {
     try {
+        const db = await readDb();
         const { content } = req.body;
 
         if (!content || !Array.isArray(content) || content.length === 0) {
@@ -505,24 +505,27 @@ app.post('/api/content/bulk', async (req, res) => {
         }
 
         // Optional: Add more robust validation for each item in the array
-        const validatedContent = content.filter(item => item.title && item.type && item.exam && item.url);
+        const newContentItems = content.map(item => {
+            if (!item.title || !item.type || !item.exam || !item.url) {
+                return null;
+            }
+            // Add a unique ID to each new item
+            return { ...item, id: uuidv4() };
+        }).filter(Boolean); // Filter out any null items from failed validation
 
-        if (validatedContent.length !== content.length) {
+        if (newContentItems.length !== content.length) {
             return res.status(400).json({ message: 'One or more content items are missing required fields (title, type, exam, url).' });
         }
 
-        const insertedContent = await Content.insertMany(validatedContent, { ordered: false }); // ordered:false attempts to insert all valid documents, even if some fail.
+        db.content.push(...newContentItems);
+        await writeDb(db);
 
         res.status(201).json({
-            message: `Successfully added ${insertedContent.length} content items.`
+            message: `Successfully added ${newContentItems.length} content items.`
         });
 
     } catch (error) {
         console.error('Error during bulk content insertion:', error);
-        // Handle potential duplicate key errors if URLs must be unique
-        if (error.code === 11000) {
-            return res.status(409).json({ message: 'Bulk operation failed due to duplicate content (e.g., URL already exists).' });
-        }
         res.status(500).json({ message: 'An internal server error occurred during bulk insertion.' });
     }
 });
@@ -531,17 +534,18 @@ app.post('/api/content/bulk', async (req, res) => {
 app.put('/api/content/:id', async (req, res) => {
     try {
         const { title, type, exam, url } = req.body;
-        const updatedContent = await Content.findByIdAndUpdate(
-            req.params.id,
-            { title, type, exam, url },
-            { new: true, runValidators: true }
-        );
+        const db = await readDb();
+        const contentIndex = db.content.findIndex(item => item.id === req.params.id);
 
-        if (!updatedContent) {
+        if (contentIndex === -1) {
             return res.status(404).json({ message: 'Content not found.' });
         }
 
-        res.status(200).json({ message: 'Content updated successfully!', content: updatedContent });
+        const updatedItem = { ...db.content[contentIndex], title, type, exam, url };
+        db.content[contentIndex] = updatedItem;
+        await writeDb(db);
+
+        res.status(200).json({ message: 'Content updated successfully!', content: updatedItem });
     } catch (error) {
         console.error('Error updating content:', error);
         res.status(500).json({ message: 'An internal server error occurred.' });
@@ -552,12 +556,16 @@ app.put('/api/content/:id', async (req, res) => {
 app.delete('/api/content/:id', async (req, res) => {
     try {
         const contentId = req.params.id;
-        const deletedContent = await Content.findByIdAndDelete(contentId);
+        const db = await readDb();
+        const initialLength = db.content.length;
 
-        if (!deletedContent) {
+        db.content = db.content.filter(item => item.id !== contentId);
+
+        if (db.content.length === initialLength) {
             return res.status(404).json({ message: 'Content not found.' });
         }
 
+        await writeDb(db);
         res.status(200).json({ message: 'Content deleted successfully!' });
     } catch (error) {
         res.status(500).json({ message: 'An internal server error occurred.' });

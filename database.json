@@ -1,0 +1,428 @@
+{
+    "users": [],
+    "content": [
+        {
+            "id": "880fecc6-f753-4820-945e-3172e6ce97f6",
+            "title": "Indian Polity - M. Laxmikanth",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1htHDBrjqZX5CP2u-jUPadLmJJKmBUGPx/preview"
+        },
+        {
+            "id": "f2b7354e-fa86-40b2-a635-ddb5a4f038b5",
+            "title": "Indian Economy - Ramesh Singh",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1ruOcdrKkV3EdOHmGIFJm-SfSPw2n2ex0/preview"
+        },
+        {
+            "id": "81dc2146-4745-4b53-aae7-c28df9640761",
+            "title": "Geography of India - Majid Husain",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1G7rXxX0F5-l55csQFCniwi4uDQZtdo1u/preview"
+        },
+        {
+            "id": "8178802a-c32b-4bec-b28a-a3274f620831",
+            "title": "Environment - Shankar IAS",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1VpuidGvaciRPPdRg3_Hsl1rMkiZ6RA5G/preview"
+        },
+        {
+            "id": "c8c1c5f1-2e0d-4aee-ad2d-7b57119751f3",
+            "title": "Ancient India - R.S. Sharma",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1a1Lqi4Kq_JcjYv9puW-351Q07QxEAoV3/preview"
+        },
+        {
+            "id": "9d55b920-a3f0-4c44-b767-b07d376158e9",
+            "title": "Medieval India - Satish Chandra",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/17-9iYR5A3TwVqURZc1OoSCNmB8c6F9gO/preview"
+        },
+        {
+            "id": "2f6983d8-b5ac-4451-80f5-01e3d7c6cca7",
+            "title": "Ethics, Integrity & Aptitude - G Subba Rao",
+            "type": "book",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1OEo-NyZACmUl5_15n7kqIkQi7O6kWRU4/preview"
+        },
+        {
+            "id": "f30534f3-2491-4f0c-a13e-50e7446b28e1",
+            "title": "Book 8 - Author 8",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/1htHDBrjqZX5CP2u-jUPadLmJJKmBUGPx/view?usp=drive_link"
+        },
+        {
+            "id": "c38cfa8e-e8a9-4765-b919-39e913570a82",
+            "title": "Book 9 - Author 9",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/1ruOcdrKkV3EdOHmGIFJm-SfSPw2n2ex0/view?usp=drive_link"
+        },
+        {
+            "id": "80ff49a9-205a-4344-ac0f-aeb1a942113e",
+            "title": "Book 10 - Author 10",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/1G7rXxX0F5-l55csQFCniwi4uDQZtdo1u/view?usp=drive_link"
+        },
+        {
+            "id": "1756c35a-aaf4-4e28-bdfa-2b211779ff35",
+            "title": "General Studies Paper 2 - TMH",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/1VpuidGvaciRPPdRg3_Hsl1rMkiZ6RA5G/view?usp=drive_link"
+        },
+        {
+            "id": "ca0b8f88-bbba-47be-bc8b-e8219c404caa",
+            "title": "Book 5 - Author 5",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/1a1Lqi4Kq_JcjYv9puW-351Q07QxEAoV3/view?usp=drive_link"
+        },
+        {
+            "id": "39824a72-ecdd-40c6-8ef7-55c5a21641f1",
+            "title": "Book 6 - Author 6",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/17-9iYR5A3TwVqURZc1OoSCNmB8c6F9gO/view?usp=drive_link"
+        },
+        {
+            "id": "b7b7ab3b-3520-473e-bd00-69fe6420d18a",
+            "title": "Book 7 - Author 7",
+            "type": "book",
+            "exam": "capf",
+            "url": "https://drive.google.com/file/d/1OEo-NyZACmUl5_15n7kqIkQi7O6kWRU4/view?usp=drive_link"
+        },
+        {
+            "id": "a2368b56-84f2-48c4-afe2-9e919fa7ee47",
+            "title": "History - Video 1",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1vEVT0mXZg9VpZig4j4ZZOEOeQQfostCi/preview"
+        },
+        {
+            "id": "128c3789-42f2-47f9-9286-0c04496498fb",
+            "title": "History - Video 2",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1uhSU_1-AR5WcnDMlj9OJJNDuz2zPO1py/preview"
+        },
+        {
+            "id": "3b99a017-ed4a-4a28-9c2f-2dd6f4098d9b",
+            "title": "History - Video 3",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1lbKtTHEQmddqxBDthZOV7yecBMtqofRO/preview"
+        },
+        {
+            "id": "7685d23f-56e0-427e-a6a5-bb776e2c20e0",
+            "title": "History - Video 4",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1ZfVWq3HqaOOC-DeQgKpDBF4mHZWzvDWV/preview"
+        },
+        {
+            "id": "d16e7b93-9305-4055-aced-c232e57b4ee6",
+            "title": "History - Video 5",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1ifpkt_nTCbifkONtLSWoAa0Qfpn2RCj0/preview"
+        },
+        {
+            "id": "4381b23b-ade3-4f7c-b47a-9b9a62c55775",
+            "title": "History - Video 6",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1Y1vk-mAuvWiNjPa1JhpOMqocBY4SnlGw/preview"
+        },
+        {
+            "id": "e285f09e-6f50-47a2-97f3-16886ef0df36",
+            "title": "History - Video 7",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1zUjISXFqWnI9gtoquSaS-E9wYZ9ykB5o/preview"
+        },
+        {
+            "id": "fc44010d-82ac-4363-801c-5ab3365f5fa1",
+            "title": "History - Video 8",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1UdO6HW7asgelluk8bD9BInNekMWtpFsB/preview"
+        },
+        {
+            "id": "7912269a-4e6b-43c7-a4fc-9da2f919bc70",
+            "title": "History - Video 9",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1N31PckK5gl47OOwoXSgIbH5KsLf_7NRL/preview"
+        },
+        {
+            "id": "b6fa91e8-5314-4542-8d16-cbfccf5b1efc",
+            "title": "History - Video 1",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1AW-ZUFTyi5iTAMtQc_RG469azc_Yvk6b/preview"
+        },
+        {
+            "id": "70936c43-f3dd-4993-85d3-8b42a0a5b1a0",
+            "title": "History - Video 2",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1vMYZNukIiHwPRD2ZPd85GOD-YyVycUdv/preview"
+        },
+        {
+            "id": "4fcdc923-606d-4f91-bc31-3994ccdd0d45",
+            "title": "History - Video 3",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/13-uK7bh_KGxtYOZ5qyKdtu_pQk2vZrwV/preview"
+        },
+        {
+            "id": "d5934659-b010-426d-b684-96bd88a67b3c",
+            "title": "History - Video 4",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1UxgNKFW2Z5mcjhdDunUhMKXJEShFs6z3/preview"
+        },
+        {
+            "id": "020610e6-2039-4d8f-a1a0-aabc86461f26",
+            "title": "History - Video 5",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1FAAV_TQB09EmrXEMyxO8Uptirb_JedSN/preview"
+        },
+        {
+            "id": "8ba754ed-b7f7-433e-badb-620a1f060692",
+            "title": "History - Video 1",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1s8p9j0m9EpYVtVRPgFRxT3ZVTxuHRKjU/preview"
+        },
+        {
+            "id": "10e64863-49af-4866-8242-7c4105c636c6",
+            "title": "History - Video 2",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1ue-Xo3lrbcrjBzuFFqszz_g93bhXSOZB/preview"
+        },
+        {
+            "id": "26039074-b1d0-4d77-9eba-73e0565b2448",
+            "title": "History - Video 3",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1Iab0zt6vndX_181HIaFOZ1K6PRIEdRDW/preview"
+        },
+        {
+            "id": "7b696819-190a-450f-bbba-5060eb1219b5",
+            "title": "History - Video 4",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1kYrq61UrfKNTvnEupZPDdom2U8U60xfZ/preview"
+        },
+        {
+            "id": "626c3e47-473f-4081-83ec-1ef52c830793",
+            "title": "History - Video 5",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1y75Ql_5ZJLj0SAueD4beCDAntJwElnz2/preview"
+        },
+        {
+            "id": "c78dc317-23d1-4049-945b-0acac310af86",
+            "title": "History - Video 6",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1EanMWmh2Fm7Np1bO3qUXvzwPcDhJcV2h/preview"
+        },
+        {
+            "id": "ae0935f3-2065-42bd-98d5-658ffa113399",
+            "title": "History - Video 7",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1btd6-ebd_yE3Qog4JvrJoHelVUle4VGt/preview"
+        },
+        {
+            "id": "0abbb2fe-fe6e-4dd0-adbc-eb790742ed99",
+            "title": "History - Video 8",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1OKr3Jc2gPJA55_0GAV2eHgpKJt8j5OHH/preview"
+        },
+        {
+            "id": "a793413d-dae0-4a13-be58-1ce0b7497e01",
+            "title": "History - Video 9",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1tVpcLt6XlaDaaQwuOfdfREr1f3vYPua7/preview"
+        },
+        {
+            "id": "351d1acb-ae1d-432f-94e6-8a416dcdb11e",
+            "title": "History - Video 10",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1O_zGKH-lvGMdSyNjiSGvczD7FmmbsNie/preview"
+        },
+        {
+            "id": "9c75a404-108e-4ae5-a95a-c1bf2bd393f4",
+            "title": "History - Video 11",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1hKJFd7KsuRE90yPcHs1Kbr5zc0L5RetV/preview"
+        },
+        {
+            "id": "7e0f300a-ffa9-4275-a33e-7696e0180dc3",
+            "title": "History - Video 12",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1M7d4F2P1xm2OqidpiMeVhkI_V7M5fjXb/preview"
+        },
+        {
+            "id": "dacd6d00-f2af-4a9e-b28e-412227c37dc6",
+            "title": "History - Video 13",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1DxGjuBcOl_oFvRpDDdElO6OU-_s_f64q/preview"
+        },
+        {
+            "id": "2fffe5f2-511d-4577-98a5-22e2eddd63f3",
+            "title": "History - Video 14",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/19kCpN5wbLL2aVlaTOUMKJx92yICYwsZO/preview"
+        },
+        {
+            "id": "c95f5dea-d88a-4a02-bae9-7f07672f418f",
+            "title": "History - Video 15",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1qRIGszur7DMG9xsTTCG8Xfu3H8vM3lom/preview"
+        },
+        {
+            "id": "d6d45501-e931-4a25-8b16-e18f4f7f8f21",
+            "title": "History - Video 16",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1vV-G5at098WCULqAYJGliypqPq78LAd9/preview"
+        },
+        {
+            "id": "3d3f9e48-248c-482a-81f7-ece1defcfd24",
+            "title": "History - Video 17",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1G_mrGIm5shZQSNjlseYjusvOkd2gVInZ/preview"
+        },
+        {
+            "id": "b770d29a-39f3-4756-ab5d-026a5c5cbb29",
+            "title": "History - Video 18",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1-pnaE2xrWp5KXsRHAmvX2E4B1P74gplu/preview"
+        },
+        {
+            "id": "88c0018d-0881-4f0e-af17-6c2ec4cc75b9",
+            "title": "History - Video 19",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1afUNRy5eH6XiZ4l9Xb8fSF52GY4RW0aV/preview"
+        },
+        {
+            "id": "7875004a-689c-424f-977e-245e2a0499e3",
+            "title": "History - Video 20",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1AhuHoGElI7H0GL7q5bumiWqbNGBQFaIc/preview"
+        },
+        {
+            "id": "ded0bbe9-8772-46c2-86cf-a0ad5754de58",
+            "title": "History - Video 21",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1xHL1O3-ysYZOfYSu41p5g42sQ_51mXcS/preview"
+        },
+        {
+            "id": "d8c81e32-7114-47db-84d3-058eb3cb3291",
+            "title": "History - Video 22",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1kf_Tu-cH772T3gZHl9cZ-BbNJ2MzlCTZ/preview"
+        },
+        {
+            "id": "bb8bf0e3-0633-4ffb-bb9a-b006db8504b3",
+            "title": "History - Video 23",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1H9sWIg0kxRDtTiHQ-2qVG4mQREm-fq8t/preview"
+        },
+        {
+            "id": "72f16247-0c05-48a6-bd69-1dcbafea2b88",
+            "title": "History - Video 25",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/19ufneidBJlufwYNlfbSmVapbsIce_h-m/preview"
+        },
+        {
+            "id": "152b537d-e3b8-478a-a9fb-88ccbe832e3c",
+            "title": "History - Video 26",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1ZExPVe03nNR79HrpmJ0H2XJB96A4BtZv/preview"
+        },
+        {
+            "id": "1fc1a49c-2358-450b-aa9c-913291613066",
+            "title": "History - Video 27",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1MEpIO_sjdr6fgUNmrqXorjDPfC7PV6hv/preview"
+        },
+        {
+            "id": "50b8db42-737b-4695-b1bc-c045d7925d24",
+            "title": "History - Video 28",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1QPqBybQqZbYgxB3gfIc5QICQiVY_QgjG/preview"
+        },
+        {
+            "id": "0c3147bb-2862-4ade-a67c-2ad89d329b98",
+            "title": "History - Video 29",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1crpGeNeUzmhnWR-FYsfwjNF-dQ_elRYL/preview"
+        },
+        {
+            "id": "e41af32b-e2c0-4eac-9202-89822e926325",
+            "title": "History - Video 30",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1NTCP-635ymMR7IlSbRenwg1DbyZhmlr4/preview"
+        },
+        {
+            "id": "33fa8709-5e4e-4f54-ae20-ec907f8ad0e5",
+            "title": "History - Video 31",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1yV_JxGy2xDlPD4rNBj4_HzdassPJKuCp/preview"
+        },
+        {
+            "id": "cf91c571-ccdf-43c2-bec6-7f19bdbff035",
+            "title": "History - Video 32",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1cWbdpwRERCpBkESpTKO8MkBBHMx25l8j/preview"
+        },
+        {
+            "id": "cc030ae4-3871-49d6-a66f-9d688fff175b",
+            "title": "History - Video 33",
+            "type": "video",
+            "exam": "upsc",
+            "url": "https://drive.google.com/file/d/1Eg6o1cx4PhSbari9Zmq7AkK-q_KjjQqg/preview"
+        }
+    ],
+    "admin": {
+        "password": "4gh4m01r"
+    }
+}
