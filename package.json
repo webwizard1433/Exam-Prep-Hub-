@@ -1,56 +1,57 @@
- {
+{
    "name": "exam-prep-hub",
    "version": "1.0.0",
    "description": "An exam preparation portal with user authentication, content management, and an admin dashboard.",
    "main": "electron-main.js",
    "scripts": {
-     "start": "node server.js",
-     "dev": "nodemon server.js",
-     "electron:start": "electron .",
-     "electron:build": "electron-builder"
+      "start": "node server.js",
+      "dev": "nodemon server.js",
+      "electron:start": "electron .",
+      "electron:build": "electron-builder"
    },
    "author": "",
    "license": "ISC",
    "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cheerio": "^1.0.0-rc.12",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "glob": "^10.3.10",
-    "uuid": "^9.0.1"
+      "bcryptjs": "^2.4.3",
+      "cheerio": "^1.0.0-rc.12",
+      "dotenv": "^16.4.5",
+      "electron-log": "^5.4.3",
+      "express": "^4.19.2",
+      "glob": "^10.3.10",
+      "uuid": "^9.0.1"
    },
    "devDependencies": {
-     "electron": "^29.1.5",
-     "electron-builder": "^24.13.3",
-     "nodemon": "^3.1.0"
+      "electron": "^29.1.5",
+      "electron-builder": "^24.13.3",
+      "nodemon": "^3.1.0"
    },
    "build": {
-     "appId": "com.saurabh.examprephub",
-     "productName": "Exam Prep Hub",
-     "copyright": "Copyright © 2024 Saurabh Kumar",
-     "files": [
-       "electron-main.js",
-       "package.json"
-     ],
-     "win": {
-       "target": "nsis",
-       "icon": "build/icon.ico"
-     },
-     "nsis": {
-       "oneClick": false,
-       "perMachine": true,
-       "allowToChangeInstallationDirectory": true,
-       "createDesktopShortcut": true,
-       "createStartMenuShortcut": true,
-       "license": "LICENSE.md"
-     },
-     "directories": {
-       "buildResources": "build"
-     },
-     "publish": {
-       "provider": "github",
-       "owner": "webwizard1433",
-       "repo": "Exam-Prep-Hub-"
-     }
+      "appId": "com.saurabh.examprephub",
+      "productName": "Exam Prep Hub",
+      "copyright": "Copyright © 2024 Saurabh Kumar",
+      "files": [
+         "electron-main.js",
+         "package.json"
+      ],
+      "win": {
+         "target": "nsis",
+         "icon": "build/icon.ico"
+      },
+      "nsis": {
+         "oneClick": false,
+         "perMachine": true,
+         "allowToChangeInstallationDirectory": true,
+         "createDesktopShortcut": true,
+         "createStartMenuShortcut": true,
+         "license": "LICENSE.md"
+      },
+      "directories": {
+         "buildResources": "build"
+      },
+      "publish": {
+         "provider": "github",
+         "owner": "webwizard1433",
+         "repo": "Exam-Prep-Hub-"
+      }
    }
- }
+}
