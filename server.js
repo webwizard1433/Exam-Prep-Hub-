@@ -133,8 +133,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, ''))); // Serve your HTML, CSS, JS files
 
 // --- Root Route to serve index.html ---
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+app.get('/', (req, res) => { 
+    res.redirect('/login.html');
 });
 
 // API Endpoint for Registration
