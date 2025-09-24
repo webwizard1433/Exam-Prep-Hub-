@@ -1,147 +1,92 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menu-toggle');
-    const sideMenu = document.querySelector('.side-menu');
+    // --- Tab Switching Logic ---
+    const tabs = document.querySelectorAll('.resource-tab-link');
+    const tabContents = document.querySelectorAll('.resource-tab-content');
 
-    if (menuToggle && sideMenu) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            sideMenu.classList.toggle('open');
-            document.body.classList.toggle('menu-open');
-        });
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs and content
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
 
-        document.addEventListener('click', (e) => {
-            if (sideMenu.classList.contains('open') && !sideMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                sideMenu.classList.remove('open');
-                document.body.classList.remove('menu-open');
+            // Add active class to the clicked tab and corresponding content
+            tab.classList.add('active');
+            const targetContent = document.getElementById(tab.dataset.tab);
+            if (targetContent) {
+                targetContent.classList.add('active');
             }
         });
-    }
-
-    // --- Resource Page Tab Logic ---
-    const resourceTabs = document.querySelector('.resource-tabs');
-    if (resourceTabs) {
-        const tabLinks = resourceTabs.querySelectorAll('.resource-tab-link');
-        const tabContents = document.querySelectorAll('.resource-tab-content');
-
-        resourceTabs.addEventListener('click', (e) => {
-            if (e.target.matches('.resource-tab-link')) {
-                const tabId = e.target.dataset.tab;
-
-                tabLinks.forEach(link => link.classList.remove('active'));
-                e.target.classList.add('active');
-
-                tabContents.forEach(content => content.classList.remove('active'));
-                document.getElementById(tabId).classList.add('active');
-            }
-        });
-    }
+    });
 
     // --- Document Viewer Modal Logic ---
     const docViewerModal = document.getElementById('doc-viewer-modal');
-    if (docViewerModal) {
-        const closeDocViewerModal = document.getElementById('close-doc-viewer-modal');
-        const docIframe = document.getElementById('doc-iframe');
-        const mainContent = document.querySelector('.main-content'); // Use a broader container
+    const closeDocViewerBtn = document.getElementById('close-doc-viewer-modal');
+    const docIframe = document.getElementById('doc-iframe');
 
-        if (mainContent) {
-            mainContent.addEventListener('click', (e) => {
-                const docLink = e.target.closest('.doc-link');
-                if (docLink) {
-                    e.preventDefault();
-                    const docUrl = docLink.dataset.docUrl;
-                    if (docUrl && docIframe) {
-                        docIframe.src = docUrl;
-                        docViewerModal.classList.remove('hidden');
-                    }
-                }
-            });
-        }
-
-        if (closeDocViewerModal) {
-            closeDocViewerModal.addEventListener('click', () => {
-                docViewerModal.classList.add('hidden');
-                if (docIframe) docIframe.src = 'about:blank'; // Clear iframe to stop loading
-            });
-        }
+    if (closeDocViewerBtn) {
+        closeDocViewerBtn.addEventListener('click', () => {
+            docViewerModal.classList.add('hidden');
+            docIframe.src = 'about:blank'; // Clear iframe to stop loading
+        });
     }
+
+    // --- Event Delegation for all '.doc-link' clicks ---
+    // This single listener handles clicks on existing and future doc links.
+    document.addEventListener('click', (event) => {
+        // Find the closest ancestor which is a .doc-link
+        const docLink = event.target.closest('.doc-link');
+
+        if (docLink) {
+            event.preventDefault(); // Prevent default link behavior
+            const docUrl = docLink.dataset.docUrl;
+
+            if (docUrl && !docUrl.startsWith('path/to/')) {
+                docIframe.src = docUrl;
+                docViewerModal.classList.remove('hidden');
+            } else {
+                // This alert can be removed if you don't want a popup for unavailable docs.
+                alert('Document not available yet.');
+            }
+        }
+    });
 
     // --- PYQ Papers Modal Logic ---
-    const pyqPapersModal = document.getElementById('pyq-papers-modal');
-    if (pyqPapersModal) {
-        const closePyqPapersModal = document.getElementById('close-pyq-papers-modal');
-        const pyqModalTitle = document.getElementById('pyq-modal-title');
-        const pyqPapersList = document.getElementById('pyq-papers-list');
-        const mainContent = document.querySelector('.main-content');
+    const pyqModal = document.getElementById('pyq-papers-modal');
+    const closePyqModalBtn = document.getElementById('close-pyq-papers-modal');
+    const pyqLinks = document.querySelectorAll('.pyq-link');
+    const pyqModalTitle = document.getElementById('pyq-modal-title');
+    const pyqPapersList = document.getElementById('pyq-papers-list');
 
-        // A mock database of papers. In a real app, this would come from a server.
-        const papersData = {
-            upsc: {
-                '2023': [
-                    { name: 'General Studies Paper I', url: '#' },
-                    { name: 'CSAT Paper II', url: '#' }
-                ],
-                '2022': [
-                    { name: 'General Studies Paper I', url: '#' },
-                    { name: 'CSAT Paper II', url: '#' }
-                ],
-                // Add more years and papers as needed
-            },
-            cds: {
-                '2023': [
-                    { name: 'English', url: '#' },
-                    { name: 'General Knowledge', url: '#' },
-                    { name: 'Elementary Mathematics', url: '#' }
-                ],
-            },
-            ssc: {
-                '2023': [
-                    { name: 'Tier-I Paper', url: '#' }
-                ]
-            },
-            capf: {
-                '2023': [
-                    { name: 'Paper I: General Ability', url: '#' },
-                    { name: 'Paper II: Essay & Comprehension', url: '#' }
-                ]
-            }
-        };
+    pyqLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const year = link.dataset.year;
+            pyqModalTitle.textContent = `Previous Year Papers - ${year}`;
+            
+            // --- Mock Data for PYQ papers ---
+            // In a real application, you would fetch this from an API
+            pyqPapersList.innerHTML = `
+                <li class="resource-item"><a href="#" class="doc-link" data-doc-url="path/to/pyq-${year}-gs1.pdf">General Studies Paper I</a></li>
+                <li class="resource-item"><a href="#" class="doc-link" data-doc-url="path/to/pyq-${year}-gs2.pdf">General Studies Paper II (CSAT)</a></li>
+            `;
+            pyqModal.classList.remove('hidden');
+        });
+    });
 
-        if (mainContent) {
-            mainContent.addEventListener('click', (e) => {
-                const pyqLink = e.target.closest('.pyq-link');
-                if (pyqLink) {
-                    e.preventDefault();
-                    const year = pyqLink.dataset.year;
-                    const examType = document.body.id || 'upsc'; // e.g., 'upsc', 'cds', etc.
-                    const examName = examType.toUpperCase();
+    if (closePyqModalBtn) {
+        closePyqModalBtn.addEventListener('click', () => {
+            pyqModal.classList.add('hidden');
+        });
+    }
 
-                    pyqModalTitle.textContent = `${examName} Papers - ${year}`;
-                    pyqPapersList.innerHTML = ''; // Clear previous list
-
-                    const papers = papersData[examType]?.[year] || [{ name: 'No papers found for this year.', url: '#' }];
-
-                    papers.forEach(paper => {
-                        const li = document.createElement('li');
-                        li.className = 'resource-item';
-                        li.innerHTML = `
-                            <a href="${paper.url}" class="doc-link" data-doc-url="${paper.url}">
-                                <div class="resource-item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
-                                <div class="resource-item-details"><h3>${paper.name}</h3></div>
-                                <div class="resource-item-action">&rarr;</div>
-                            </a>
-                        `;
-                        pyqPapersList.appendChild(li);
-                    });
-
-                    pyqPapersModal.classList.remove('hidden');
+    // Close modals when clicking on the overlay
+    [docViewerModal, pyqModal].forEach(modal => {
+        if (modal) {
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
                 }
             });
         }
-
-        if (closePyqPapersModal) {
-            closePyqPapersModal.addEventListener('click', () => {
-                pyqPapersModal.classList.add('hidden');
-            });
-        }
-    }
+    });
 });

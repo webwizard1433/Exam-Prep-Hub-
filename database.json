@@ -1,5 +1,13 @@
 {
-    "users": [],
+    "users": [
+        {
+            "id": "c36bd92d-d002-49bd-8f7c-114466d47ade",
+            "name": "Saurabh Kumar",
+            "email": "webwizard143@gmail.com",
+            "password": "$2a$10$3tXVbX5mgwsaFDyzLLVTxOtalMkZLtoB2.iy/AhK0d3ipRTtFZLAy",
+            "createdAt": "2025-09-24T19:28:59.448Z"
+        }
+    ],
     "content": [
         {
             "id": "880fecc6-f753-4820-945e-3172e6ce97f6",
