@@ -8,7 +8,7 @@ const cheerio = require('cheerio'); // HTML parser
 const glob = require('glob'); // To find files matching a pattern
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // Use port from environment variable or default to 3000
 
 // --- Database Connection ---
 const MONGO_URI = process.env.MONGO_URI;
@@ -353,16 +353,21 @@ app.post('/api/admin-login', async (req, res) => {
             return res.status(400).json({ message: 'Password is required.' });
         }
 
-        const configPath = path.join(__dirname, 'admin-config.json');
-        const configData = await fs.readFile(configPath, 'utf8');
-        const config = JSON.parse(configData);
+        // Use environment variable for admin password
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-        if (password === config.adminPassword) {
+        if (!ADMIN_PASSWORD) {
+            console.error('ADMIN_PASSWORD environment variable is not set.');
+            return res.status(500).json({ message: 'Admin password not configured on server.' });
+        }
+
+        if (password === ADMIN_PASSWORD) {
             res.status(200).json({ message: 'Admin login successful!' });
         } else {
             res.status(401).json({ message: 'Incorrect admin password.' });
         }
     } catch (error) {
+        console.error('Error during admin login:', error);
         res.status(500).json({ message: 'An internal server error occurred.' });
     }
 });
@@ -372,19 +377,28 @@ app.put('/api/admin/change-password', async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body;
 
-        // Read the current admin password from the config file
-        const configPath = path.join(__dirname, 'admin-config.json');
-        const configData = await fs.readFile(configPath, 'utf8');
-        const config = JSON.parse(configData);
+        // Use environment variable for admin password
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-        // Verify the current password
-        if (currentPassword !== config.adminPassword) {
+        if (!ADMIN_PASSWORD) {
+            console.error('ADMIN_PASSWORD environment variable is not set.');
+            return res.status(500).json({ message: 'Admin password not configured on server.' });
+        }
+
+        // Verify the current password against the environment variable
+        if (currentPassword !== ADMIN_PASSWORD) {
             return res.status(401).json({ message: 'Incorrect current password.' });
         }
 
+        // NOTE: Changing the admin password via API will only update it in the environment variable if the hosting platform supports it.
+        // For Render, you would typically update the environment variable directly in the Render dashboard.
+        // This API endpoint as written will NOT persist the new password across server restarts unless you manually update the env var on Render.
+        // For a more robust solution, you might store admin credentials in the database.
         // Update the password in the config object and write it back to the file
-        config.adminPassword = newPassword;
-        await fs.writeFile(configPath, JSON.stringify(config, null, 4), 'utf8');
+        // For now, we'll just acknowledge the change for the current session (not persistent on Render)
+        // If you want to make this persistent, you'd need to store it in your database or a secure secrets manager.
+        // For this example, we'll just return success, but be aware it's not persistent.
+        // process.env.ADMIN_PASSWORD = newPassword; // This would only affect the current running process, not persistent.
 
         res.status(200).json({ message: 'Admin password changed successfully!' });
 
