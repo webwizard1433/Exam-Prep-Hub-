@@ -1,0 +1,474 @@
+/* Basic Reset & Global Styles */
+:root {
+    --primary-color: #e2e8f0; /* Lighter text for better readability */
+    --secondary-color: #020617; /* Deeper, more modern black */
+    --accent-color: #4f46e5; /* A vibrant indigo for accents */
+    --card-bg: #0f172a; /* A slightly lighter card background */
+    --border-color: #1e293b; /* Subtle border for depth */
+    --font-family: 'Poppins', sans-serif;
+    --header-height: 70px; /* A sleeker header height */
+    --success-color: #22c55e;
+    --danger-color: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* --- Re-used Header and Side Menu Styles (from home-style.css) --- */
+/* This ensures the navigation remains consistent across pages */
+
+.main-header {
+    height: var(--header-height);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 50;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 800px; /* Increased width */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* This will keep it centered */
+    text-align: center;
+    font-family: "Brush Script MT", "Brush Script Std", cursive;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: #e2e8f0;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: absolute;
+    left: 1.5rem;
+}
+
+.menu-toggle:hover {
+    color: var(--accent-color);
+}
+
+.header-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    right: 1.5rem;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    margin: 1.5rem 0 0 2rem; /* Position it below the header */
+    width: fit-content; /* Make it only as wide as its content */
+    background-color: transparent;
+    color: #94a3b8; /* Muted color */
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    transform: translateX(-101%);
+    height: 100%;    background-color: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid var(--border-color);
+    padding: 1.5rem;
+    padding-top: calc(var(--header-height) + 1rem);
+    box-sizing: border-box;
+    z-index: 1100;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+body.menu-open .main-content-wrapper {
+    filter: blur(5px) brightness(0.9);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.3s ease-in-out;
+}
+
+.side-menu h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+.side-menu-nav {
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.side-menu .nav-link {
+    display: flex;
+    align-items: center;
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.side-menu .nav-link svg {
+    margin-right: 0.8rem;
+    width: 20px;
+    height: 20px;
+}
+
+.side-menu .nav-link:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+.side-menu .nav-link.active {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.side-menu-footer {
+    margin-top: auto;
+}
+
+.btn-profile {
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.btn-logout {
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.btn-logout:hover {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    text-align: left;
+    color: var(--primary-color);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.modal-content.modal-xl {
+    width: 80vw; /* 80% of viewport width */
+    height: 80vh; /* 80% of viewport height */
+    max-width: 1400px; /* Set a max width for very large screens */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 15px;
+    right: 50px;
+}
+
+.modal-control-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.iframe-container {
+    flex-grow: 1; /* Allow iframe to fill available space */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-overlay.hidden .modal-content {
+    transform: scale(0.9);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-details p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* --- Modern styles for Change Password Modal --- */
+#change-password-modal .modal-content h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#change-password-form .input-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+#change-password-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+
+/* --- New Styles for Exam Page --- */
+.main-content-wrapper {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.exam-main-card {
+    max-width: 800px; /* Constrain the width of the main card */
+    margin: 0 auto; /* Center the card within the content area */
+    width: 100%;
+    background-color: var(--card-bg); /* Give it a background to stand out */
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.exam-page .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.exam-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.exam-header h1 {
+    font-size: 2.2rem; /* Decreased font size for a more balanced look */
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+}
+
+.exam-header p {
+    font-size: 1.1rem;
+    color: #94a3b8; /* Lighter grey for subheading */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* New styles for the UPSC page description box */
+.exam-overview {
+    text-align: center;
+}
+
+.overview-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.overview-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Changed to a circle */
+    object-fit: cover; /* Changed to 'cover' to fill the entire circle */
+    margin: 0 auto 1rem auto; /* Center it and add space below */
+    border: 2px solid var(--border-color);
+    background-color: #fff; /* Add a white background in case the logo is transparent */
+}
+
+.exam-overview p {
+    color: #94a3b8;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 1.5rem; /* Space below the description */
+}
+
+.overview-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto; /* Pushes buttons to the bottom */
+}
+
+.btn-action {
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    background-color: var(--accent-color); /* Use accent color */
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-action:hover {
+    background-color: #4338ca; /* Darker indigo on hover */
+    transform: translateY(-2px);
+}
+
+.btn-action.btn-secondary {
+    background-color: #334155;
+}
+
+.btn-action.btn-secondary:hover {
+    background-color: #475569;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exam-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.profile-details .btn-action {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.profile-details-page {
+    padding: 1rem;
+    text-align: left;
+}
+
+.profile-details-page p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #cbd5e1;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.5rem;
+}
+
+.profile-details-page .edit-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    background-color: #334155;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.profile-actions .btn-action {
+    flex: 1;
+    margin-top: 0;
+}
+
+.profile-details-page .btn-action.btn-secondary {
+    background-color: #334155;
+}
+.profile-details-page .btn-action.btn-secondary:hover {
+    background-color: #475569;
+}

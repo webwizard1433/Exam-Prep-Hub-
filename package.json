@@ -1,0 +1,23 @@
+ {
+   "name": "exam-prep-hub",
+   "version": "1.0.0",
+   "description": "An exam preparation portal with user authentication, content management, and an admin dashboard.",
+   "main": "server.js",
+   "scripts": {
+     "start": "node server.js",
+     "dev": "nodemon server.js"
+   },
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+     "bcryptjs": "^2.4.3",
+     "cheerio": "^1.0.0-rc.12",
+     "dotenv": "^16.4.5",
+     "express": "^4.19.2",
+     "glob": "^10.3.10",
+     "mongoose": "^8.2.3"
+   },
+   "devDependencies": {
+     "nodemon": "^3.1.0"
+   }
+ }

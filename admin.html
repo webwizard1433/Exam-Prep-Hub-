@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Exam Prep Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/jpeg" href="https://st4.depositphotos.com/1842549/21099/i/450/depositphotos_210992656-stock-photo-success-icon.jpg">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="admin-sidebar side-menu"> <!-- Keep both classes for compatibility -->
+            <div class="sidebar-header">
+                <img src="https://st4.depositphotos.com/1842549/21099/i/450/depositphotos_210992656-stock-photo-success-icon.jpg" alt="App Logo" class="sidebar-logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" id="dashboard-nav-link" class="nav-link active" data-view="dashboard-view">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" id="users-nav-link" class="nav-link" data-view="users-view">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Users</span>
+                </a>
+                <a href="#" id="content-nav-link" class="nav-link" data-view="content-view">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M4 6h16M4 18h16"></path></svg>
+                    <span>Content</span>
+                </a>
+                <!-- Add more nav links here -->
+            </nav>
+            <div class="sidebar-footer">
+                <button id="admin-profile-btn" class="btn btn-logout">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>My Profile</span>
+                </button>
+                <button id="logout-button" class="btn btn-logout"> <!-- Added missing ID -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <div class="main-content-wrapper">
+            <header class="admin-header">
+                <button id="menu-toggle" class="menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <h1 class="page-title">Dashboard Overview</h1>
+            </header>
+
+            <main class="admin-main">
+                <!-- View for Dashboard -->
+                <div id="dashboard-view" class="view active">
+                    <div class="dashboard-grid">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-card-icon users">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                                </div>
+                                <h3>Total Users</h3>
+                                <p id="stats-total-users" class="stat-number">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-icon exams">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                </div>
+                                <h3>Active Exams</h3>
+                                <p id="stats-active-exams" class="stat-number">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-icon uploads">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                </div>
+                                <h3>Content Uploads</h3>
+                                <p id="stats-content-uploads" class="stat-number">0</p>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-card-icon status">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                                </div>
+                                <h3>Server Status</h3>
+                                <p class="stat-status online">Online</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View for Users -->
+                <div id="users-view" class="view">
+                    <!-- User management content will go here -->
+                </div>
+
+                <!-- View for Content -->
+                <div id="content-view" class="view">
+                    <!-- Content management content will go here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Users List Modal -->
+    <div id="users-modal" class="modal-overlay hidden">
+        <div class="modal-content modal-xl">
+            <button id="close-users-modal" class="close-modal">&times;</button>
+            <!-- User view template will be injected here -->
+        </div>
+    </div>
+
+    <!-- Users List Section (was a modal, now a template) -->
+    <template id="users-view-template">
+        <div class="view-header">
+            <div class="modal-header">
+                <div class="search-bar-container">
+                    <input type="text" id="user-search-input" placeholder="Search by name or email...">
+                    <button id="user-search-btn">Search</button>
+                </div>
+                <h2>Registered Users</h2>
+                <button id="export-users-csv-btn" class="btn-action btn-secondary">Export to CSV</button>
+                <button id="add-user-btn" class="btn-action btn-save">Add New User</button>
+            </div>
+        </div>
+        <div class="user-table-container">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Registration Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+            </table>
+            <div id="users-pagination" class="pagination-controls"></div>
+        </div>
+    </template>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-add-user-modal" class="close-modal">&times;</button>
+            <h2>Add New User</h2>
+            <form id="add-user-form">
+                <div class="input-group">
+                    <input type="text" id="add-user-name" required>
+                    <label for="add-user-name">Full Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="add-user-email" required>
+                    <label for="add-user-email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="add-user-password" required>
+                    <label for="add-user-password">Password</label>
+                </div>
+                <button type="submit" class="btn">Create User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Content Management Modal -->
+    <div id="content-modal" class="modal-overlay hidden">
+        <div class="modal-content modal-xl">
+            <button id="close-content-modal" class="close-modal">&times;</button>
+            <!-- Content view template will be injected here -->
+        </div>
+    </div>
+
+    <!-- Content Management Section (was a modal, now a template) -->
+    <template id="content-view-template">
+        <div class="view-header">
+            <div class="modal-header">
+                <h2>Content Management</h2>
+                <div class="search-bar-container">
+                    <input type="text" id="content-search-input" placeholder="Search by title...">
+                    <button id="content-search-btn">Search</button>
+                </div>
+                <button id="export-content-csv-btn" class="btn-action btn-secondary">Export to CSV</button>
+                <button id="bulk-add-content-btn" class="btn-action btn-secondary">Bulk Add</button>
+                <button id="add-content-btn" class="btn-action btn-save">Add New Content</button>
+            </div>
+        </div>
+        <div class="user-table-container">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th data-sort="title" class="sortable">Title <span></span></th>
+                        <th data-sort="type" class="sortable">Type <span></span></th>
+                        <th data-sort="exam" class="sortable">Exam <span></span></th>
+                        <th data-sort="url">URL</th>
+                        <th data-sort="actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="content-table-body"></tbody>
+            </table>
+            <div id="content-pagination" class="pagination-controls"></div>
+        </div>
+    </template>
+
+    <!-- Unified Add/Edit Content Modal -->
+    <div id="content-form-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-content-form-modal" class="close-modal">&times;</button>
+            <h2 id="content-form-title">Add/Edit Content</h2>
+            <form id="content-form">
+                <input type="hidden" id="content-id">
+                <div class="input-group">
+                    <input type="text" id="content-title" required>
+                    <label for="content-title">Title (e.g., Indian Polity, Video 1)</label>
+                </div>
+                <div class="input-group">
+                    <select id="content-type" required>
+                        <option value="" disabled selected>Select Content Type</option>
+                        <option value="book">Book</option>
+                        <option value="video">Video</option>
+                    </select>
+                    <label for="content-type">Content Type</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="content-exam" required>
+                    <label for="content-exam">Exam (e.g., upsc, cds)</label>
+                </div>
+                <div class="input-group">
+                    <input type="url" id="content-url" required>
+                    <label for="content-url">Content URL (Google Drive Link)</label>
+                </div>
+                <button type="submit" class="btn" id="content-form-submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bulk Add Content Modal -->
+    <div id="bulk-add-content-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-bulk-add-content-modal" class="close-modal">&times;</button>
+            <h2>Bulk Add Content</h2>
+            <p>Enter content data below, one item per line, in the format: <strong>Title,Type,Exam,URL</strong></p>
+            <p>Example: <code>Ancient History Part 1,book,upsc,https://drive.google.com/link1</code></p>
+            <form id="bulk-add-content-form">
+                <div class="input-group">
+                    <textarea id="bulk-content-data" rows="10" required></textarea>
+                    <label for="bulk-content-data">Content Data</label>
+                </div>
+                <button type="submit" class="btn">Add Bulk Content</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Admin Profile Modal -->
+    <div id="admin-profile-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-admin-profile-modal" class="close-modal">&times;</button>
+            <h2>Administrator Profile</h2>
+            <div class="profile-details">
+                <p><strong>Name:</strong> <span>Admin</span></p>
+                <p><strong>Role:</strong> <span>Site Administrator</span></p>
+                <button id="admin-change-password-btn" class="btn-action">Change Password</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Change Password Modal (This is a placeholder, as admin password is not in DB) -->
+    <div id="admin-change-password-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-admin-change-password-modal" class="close-modal">&times;</button>
+            <h2>Change Admin Password</h2>
+            <form id="admin-change-password-form">
+                <div class="input-group">
+                    <input type="password" id="admin-current-password" required>
+                    <label for="admin-current-password">Current Password</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="admin-new-password" required>
+                    <label for="admin-new-password">New Password</label>
+                </div>
+                <button type="submit" class="btn">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

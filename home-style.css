@@ -1,0 +1,382 @@
+/* Basic Reset & Global Styles */
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #f8f9fa; /* Lighter gray for background */
+    --accent-color: #007bff;
+    --hover-color: #0056b3;
+    --text-color: #333;
+    --sidebar-bg: #1e293b; /* Dark blue for sidebar */
+    --sidebar-text: #cbd5e1;
+    --sidebar-hover: #334155;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    background: #0f172a; /* Static dark background */
+    color: #e2e8f0; /* Set a light default text color for dark mode */    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-header {
+    padding: 2rem 2rem; /* Doubled the vertical padding from 1rem to 2rem */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 50; /* Below sidebar but above content */
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 800px; /* Match exam-style.css */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1; /* Place it behind the menu button */
+
+    /* New stylish font and lightning effect */
+    font-family: 'Brush Script MT', 'Brush Script Std', 'cursive'; /* A stylish, script-like font */
+    color: var(--primary-color);
+    /* text-shadow effect removed */
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    position: absolute;
+    left: 1.5rem;
+}
+
+.menu-toggle:hover {
+    color: var(--accent-color);
+}
+
+.header-logo {
+    width: 50px; /* Reduced size to fit within header */
+    height: 50px; /* Reduced size to fit within header */
+    border-radius: 50%;
+    object-fit: contain; /* Changed to 'contain' to fit the whole image */
+    border: 2px solid var(--primary-color);
+    background-color: var(--sidebar-bg);
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    right: 1.5rem;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    animation: space 50s linear infinite;
+    z-index: -1;
+}
+
+/* --- New Flip Menu (Left Sidebar) --- */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Expanded width */
+    transform: translateX(-100%); /* Hidden by default */
+    height: 100%;
+    background-color: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    padding-top: calc(65px + 1rem); /* Space for header */
+    box-sizing: border-box;
+    z-index: 1100; /* Above header */
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+body.menu-open .main-content-wrapper {
+    filter: blur(5px) brightness(0.7);
+    pointer-events: none; /* Prevent interaction with blurred background */
+    user-select: none;
+    transition: filter 0.3s ease-in-out;
+}
+
+.side-menu h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+.side-menu-nav {
+    overflow-y: auto; /* Allow this list to scroll if needed */
+    flex-grow: 1; /* Allow it to take up available space */
+}
+
+.side-menu .nav-link {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.side-menu .nav-link svg {
+    margin-right: 0.8rem; /* Space between icon and text */
+    width: 20px;
+    height: 20px;
+}
+
+.side-menu .nav-link:hover { background-color: rgba(255, 255, 255, 0.2); }
+
+.side-menu .nav-link.active {
+    background-color: #0f172a; /* Darker background for contrast */
+    color: #facc15; /* Bright yellow text */
+    font-weight: 600;
+    border-left: 4px solid #facc15; /* Prominent yellow left border */
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.2); /* Subtle glow */
+}
+
+.side-menu-footer {
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+.btn-profile {
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.btn-logout {
+    width: 100%;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.btn-logout:hover {
+    background-color: #dc3545 !important; /* Red color on hover */
+    color: var(--primary-color) !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    text-align: left;
+    color: var(--primary-color);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.modal-content.modal-xl {
+    width: 80vw; /* 80% of viewport width */
+    height: 80vh; /* 80% of viewport height */
+    max-width: 1400px; /* Set a max width for very large screens */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 15px;
+    right: 50px;
+}
+
+.modal-control-btn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.iframe-container {
+    flex-grow: 1; /* Allow iframe to fill available space */
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-overlay.hidden .modal-content {
+    transform: scale(0.9);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: #999;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-details p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-details .btn-action {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* --- Modern styles for Change Password Modal --- */
+#change-password-modal .modal-content h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#change-password-form .input-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+#change-password-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.main-content-wrapper {
+    flex-grow: 1;
+    background-color: #1e293b; /* Lighter background for content area */
+    overflow-y: auto; /* Allow this wrapper to scroll */
+}
+
+/* Main Content Area */
+.home-page .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* --- Styles for Exam Template Pages --- */
+.exam-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--sidebar-hover);
+}
+
+.exam-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.exam-header p {
+    font-size: 1.1rem;
+    color: var(--sidebar-text);
+}
+
+.exam-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.exam-card {
+    background-color: #1e293b;
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.exam-card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--sidebar-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.exam-card:hover {
+    transform: translateY(-5px);
+    background-color: var(--sidebar-hover);
+    cursor: pointer;
+}

@@ -1,0 +1,272 @@
+/* --- Styles for Resource Pages --- */
+
+.resource-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.resource-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.resource-header p {
+    font-size: 1.1rem;
+    color: #94a3b8; /* Lighter grey for subheading */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.resource-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.resource-tab-link {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #64748b; /* Muted color for inactive tabs */
+    font-size: 1rem;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.resource-tab-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.resource-tab-link.active {
+    color: var(--accent-color);
+}
+
+.resource-tab-link.active::after {
+    transform: scaleX(1);
+}
+
+.resource-tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.resource-tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.resource-section {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.resource-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.resource-tab-content#pyqs .resource-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.resource-tab-content#pyqs .resource-item a {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.resource-tab-content#videos .resource-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.resource-tab-content#videos .resource-item {
+    flex-direction: column;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+}
+
+.resource-tab-content#videos .resource-item a {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.resource-list {
+    list-style: none;
+}
+
+.resource-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background-color: #020617; /* Match the deep background */
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.resource-tab-content#pyqs .resource-item {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.resource-tab-content#pyqs .resource-item-icon {
+    margin-right: 0; /* Remove margin when in a column layout */
+    margin-bottom: 0.75rem;
+    font-size: 2.5rem;
+}
+
+.resource-tab-content#pyqs .resource-item-icon svg {
+    width: 48px; /* Increased from 24px */
+    height: 48px; /* Increased from 24px */
+}
+
+.resource-tab-content#videos .resource-item-icon {
+    margin-right: 0;
+    font-size: 2.5rem; /* Make emoji icon larger */
+    margin-bottom: 0.75rem;
+}
+
+.resource-item:hover {
+    transform: translateY(-3px);
+    background-color: #1e293b;
+    border-color: var(--accent-color);
+}
+
+.resource-item-icon {
+    flex-shrink: 0;
+    margin-right: 1.5rem;
+    color: var(--accent-color);
+}
+
+.resource-tab-content#pyqs .resource-item-details h3 {
+    font-size: 1.5rem; /* Increased font size for the year */
+    font-weight: 700;
+}
+
+.resource-item-details h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.resource-item-details p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.resource-item a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.resource-item-action {
+    margin-left: auto;
+    color: #94a3b8;
+}
+
+.resource-tab-content#pyqs .resource-item-action {
+    display: none; /* Hide the arrow icon */
+}
+
+.resource-tab-content#videos .resource-item-action {
+    display: none;
+}
+
+/* --- Styles for Document Viewer Modal --- */
+.modal-doc-viewer {
+    width: 90vw;
+    height: 90vh;
+    max-width: none;
+    max-height: none;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-doc-viewer .close-modal {
+    top: 5px;
+    right: 10px;
+}
+
+.modal-doc-viewer iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* --- Styles for PYQ Papers Modal --- */
+#pyq-papers-modal .modal-content {
+    max-width: 600px;
+}
+
+#pyq-modal-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#pyq-papers-list .resource-item {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Styles for Video Sub-Sections --- */
+.video-section {
+    margin-bottom: 3rem;
+}
+
+.video-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+.video-thumbnail {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.video-thumbnail:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.video-thumbnail p {
+    padding: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
