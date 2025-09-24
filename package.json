@@ -12,15 +12,19 @@
    "author": "",
    "license": "ISC",
    "dependencies": {
+      "@capacitor/android": "^7.4.3",
+      "@capacitor/core": "^7.4.3",
       "bcryptjs": "^2.4.3",
       "cheerio": "^1.0.0-rc.12",
       "dotenv": "^16.4.5",
       "electron-log": "^5.4.3",
+      "electron-updater": "^6.6.2",
       "express": "^4.19.2",
       "glob": "^10.3.10",
       "uuid": "^9.0.1"
    },
    "devDependencies": {
+      "@capacitor/cli": "^7.4.3",
       "electron": "^29.1.5",
       "electron-builder": "^24.13.3",
       "nodemon": "^3.1.0"

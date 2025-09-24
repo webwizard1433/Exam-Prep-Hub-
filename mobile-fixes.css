@@ -1,0 +1,11 @@
+/*
+ * Fixes for running the web app in a mobile (Capacitor/Cordova) container.
+ */
+
+/* Prevent horizontal scrolling and pull-to-refresh behavior */
+html, body {
+    overflow-x: hidden;
+    overscroll-behavior-y: contain; /* Prevents pull-down-to-refresh on the whole page */
+    position: relative;
+    width: 100%;
+}

@@ -1,0 +1,9 @@
+{
+  "appId": "com.saurabh.examprephub",
+  "appName": "Exam Prep Hub",
+  "webDir": "www",
+  "server": {
+    "url": "https://exam-prep-hub.onrender.com",
+    "cleartext": true
+  }
+}
