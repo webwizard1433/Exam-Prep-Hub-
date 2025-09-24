@@ -59,8 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showLoginLink.addEventListener('click', (e) => {
         e.preventDefault();
         studentRegisterForm.classList.remove('active');
-        studentRegisterForm.style.display = 'none';
-        document.querySelector('.tab-link[data-tab="admin-login"]').style.display = 'inline-block';
+        // studentRegisterForm.style.display = 'none'; // This is handled by the 'active' class
         document.querySelector('.tab-header').style.display = 'flex'; // Show the tab header again
         studentLoginForm.classList.add('active');
     });
