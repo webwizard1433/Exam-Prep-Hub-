@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('userName', result.user.name); // This line was correct, let's ensure the server response is handled right.
                 localStorage.setItem('userEmail', email); // Store email as well
                 // Login successful, redirect to the home page
-                window.location.href = '/home.html';
+                window.location.href = '/upsc.html'; // Corrected redirect to the main exam page
             } else {
                 // Show error message
                 alert(`Error: ${result.message}`);

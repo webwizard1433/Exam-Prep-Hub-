@@ -117,3 +117,41 @@
         padding-left: 0;
     }
 }
+
+/* --- Admin Dashboard Responsive Styles --- */
+@media (max-width: 768px) {
+    .admin-header {
+        padding: 1rem; /* Reduce header padding */
+    }
+
+    .admin-header .page-title {
+        font-size: 1.25rem; /* Smaller title on mobile */
+    }
+
+    .admin-main {
+        padding: 1rem; /* Reduce main content padding */
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr; /* Stack stat cards vertically */
+    }
+
+    .stat-number, .stat-status.online {
+        font-size: 2rem; /* Smaller stat numbers */
+    }
+
+    .modal-content.modal-lg {
+        width: 95vw; /* Ensure large modals fit */
+        padding: 1.5rem;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-bar-container button {
+        border-radius: 5px; /* Fix button radius on mobile */
+        margin-top: 0.5rem;
+    }
+}
