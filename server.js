@@ -130,12 +130,13 @@ try {
 
 // Middleware to parse JSON bodies and serve static files
 app.use(express.json());
-app.use(express.static(path.join(__dirname, ''))); // Serve your HTML, CSS, JS files
 
 // --- Root Route to serve index.html ---
 app.get('/', (req, res) => { 
     res.redirect('/login.html');
 });
+
+app.use(express.static(path.join(__dirname, ''))); // Serve all other static files like CSS, JS, and other HTML files
 
 // API Endpoint for Registration
 app.post('/api/register', async (req, res) => {
