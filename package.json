@@ -1,6 +1,6 @@
 {
    "name": "exam-prep-hub",
-   "version": "1.0.1",
+   "version": "1.0.2",
    "description": "An exam preparation portal with user authentication, content management, and an admin dashboard.",
    "main": "electron-main.js",
    "scripts": {

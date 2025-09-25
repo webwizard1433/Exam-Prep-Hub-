@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Exam Prep Hub</title>
+    <title>Exam Prep Hub - Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" type="image/jpeg" href="https://st4.depositphotos.com/1842549/21099/i/450/depositphotos_210992656-stock-photo-success-icon.jpg">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="exam-style.css">
+    <link rel="stylesheet" href="home-style.css">
 </head>
 <body class="home-page">
     <header class="main-header">
@@ -59,17 +59,43 @@
     </aside>
     <div class="main-content-wrapper">
         <main class="main-content">
-            <div class="exam-main-card">
-                <div class="exam-overview">
-                    <h2 class="overview-title">UPSC</h2>
-                    <img src="https://static.toiimg.com/thumb/msid-81662902,width-1280,height-720,resizemode-4/81662902.jpg" alt="UPSC Logo" class="overview-logo">
-                    <p>The Civil Services Examination (CSE) is a nationwide competitive examination in India conducted by the Union Public Service Commission for recruitment to various Civil Services of the Government of India, including the Indian Administrative Service (IAS), Indian Foreign Service (IFS), and Indian Police Service (IPS).<br><br>It is a multi-stage exam consisting of a preliminary examination, a main examination, and an interview.</p>
-                    <div class="overview-actions">
-                        <a href="upsc-resources.html" class="btn-action">Start Learning</a>
-                        <a href="https://upsc.gov.in/" target="_blank" class="btn-action btn-secondary">Website Link</a>
-                    </div>
+            <section class="hero-section">
+                <h1>Your Journey to Success Starts Here</h1>
+                <p>Comprehensive preparation materials, past papers, and expert resources for India's top competitive exams. Let's get you ready.</p>
+                <a href="#exams" class="cta-button">Explore Exams</a>
+            </section>
+
+            <section id="exams">
+                <h2 class="section-title">All Examinations</h2>
+                <div class="exam-content-grid">
+                    <a href="upsc.html" class="exam-card">
+                        <div class="exam-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3>UPSC Civil Services</h3>
+                        <p>The premier civil services examination for entry into IAS, IPS, and other central government services.</p>
+                        <div class="exam-card-footer">
+                            <span>View Details</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </div>
+                    </a>
+
+                    <a href="cds.html" class="exam-card">
+                        <div class="exam-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                        <h3>CDS</h3>
+                        <p>Combined Defence Services Examination for recruitment into the Indian Armed Forces.</p>
+                        <div class="exam-card-footer">
+                            <span>View Details</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </div>
+                    </a>
+                    
+                    <!-- Add more exam cards for SSC, CAPF etc. here -->
+
                 </div>
-            </div>
+            </section>
         </main>
     </div>
 

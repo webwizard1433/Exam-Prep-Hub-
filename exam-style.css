@@ -310,24 +310,29 @@ body.menu-open .main-content-wrapper {
 /* --- New Styles for Exam Page --- */
 .main-content-wrapper {
     flex-grow: 1;
+    display: flex; /* Enable flexbox for centering */
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
     overflow-y: auto;
-    padding-top: calc(var(--header-height) + 4rem); /* Space for header and back button */
+    padding-top: var(--header-height); /* Remove extra padding, header handles it */
     padding-bottom: env(safe-area-inset-bottom, 1rem); /* Add padding for the home bar */
 }
 
 .exam-main-card {
-    max-width: 800px; /* Constrain the width of the main card */
     margin: 0 auto; /* Center the card within the content area */
     width: 100%;
-    background-color: var(--card-bg); /* Give it a background to stand out */
+    background-color: var(--card-bg);
+    /* Add a subtle background pattern */
+    background-image: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2394a3b8' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     padding: 2rem;
     border-radius: 15px;
+    position: relative;
+    overflow: hidden;
 }
 
 .exam-page .main-content {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem;
 }
 
 .exam-header {
@@ -474,4 +479,102 @@ body.menu-open .main-content-wrapper {
 }
 .profile-details-page .btn-action.btn-secondary:hover {
     background-color: #475569;
+}
+
+/* --- New UPSC Page Layout Styles --- */
+.exam-page-header {
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1580674285654-b9597a856c5c?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.exam-page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.exam-page-header p {
+    font-size: 1.2rem;
+    color: #94a3b8;
+}
+
+.exam-page-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.exam-page-main {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.content-section {
+    margin-bottom: 2rem;
+}
+
+.content-section:last-child {
+    margin-bottom: 0;
+}
+
+.content-section h2 {
+    font-size: 1.8rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: #a5b4fc; /* Indigo accent for subheadings */
+}
+
+.content-section p {
+    color: #94a3b8;
+    line-height: 1.7;
+}
+
+.content-section ul, .content-section ol {
+    padding-left: 1.5rem;
+    color: #94a3b8;
+}
+
+.content-section li {
+    margin-bottom: 0.5rem;
+}
+
+.info-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    position: sticky; /* Make it stick on scroll */
+    top: calc(var(--header-height) + 2rem);
+}
+
+.info-card-logo {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem auto;
+    border: 2px solid var(--border-color);
+}
+
+/* Responsive adjustments for the new layout */
+@media (max-width: 900px) {
+    .exam-page-grid {
+        grid-template-columns: 1fr;
+    }
 }
