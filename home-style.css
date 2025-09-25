@@ -34,7 +34,7 @@ body {
     background: rgba(15, 23, 42, 0.8);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: env(safe-area-inset-top); /* Add padding for the status bar */
+    padding-top: env(safe-area-inset-top, 0); /* Add padding for the status bar, with a fallback */
     position: relative;
     z-index: 50; /* Below sidebar but above content */
 }
@@ -320,6 +320,7 @@ body.menu-open .main-content-wrapper {
 .main-content-wrapper {
     flex-grow: 1;
     background-color: #1e293b; /* Lighter background for content area */
+    padding-top: var(--header-height); /* Add padding to push content below the fixed header */
     overflow-y: auto; /* Allow this wrapper to scroll */
 }
 

@@ -38,7 +38,7 @@ body {
     justify-content: space-between;
     background: var(--secondary-color);
     border-bottom: 1px solid var(--border-color);
-    padding-top: env(safe-area-inset-top); /* Add padding for the status bar */
+    padding-top: env(safe-area-inset-top, 0); /* Add padding for the status bar, with a fallback */
     position: relative;
     z-index: 50;
 }
@@ -310,6 +310,7 @@ body.menu-open .main-content-wrapper {
 .main-content-wrapper {
     flex-grow: 1;
     overflow-y: auto;
+    padding-top: var(--header-height); /* Add padding to push content below the fixed header */
 }
 
 .exam-main-card {
