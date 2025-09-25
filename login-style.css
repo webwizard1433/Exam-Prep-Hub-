@@ -2,10 +2,10 @@
 :root {
     --primary-color: #ffffff;
     --secondary-color: #0f172a; /* Dark blue-black background */
-    --accent-color: #007bff;
-    --hover-color: #0056b3;
+    --accent-color: #8A2BE2; /* A vibrant purple */
+    --hover-color: #7B1FA2; /* A darker purple for hover */
     --text-color: #333;
-    --border-color: #334155;
+    --border-color: #6A1B9A; /* A matching purple for borders */
     --font-family: 'Poppins', sans-serif;
     --card-bg: rgba(30, 41, 59, 0.7);
 }
@@ -25,7 +25,6 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
-    overflow: hidden; /* Hide overflowing stars */
 }
 
 body::before {
@@ -40,22 +39,15 @@ body::before {
     z-index: -1;
 }
 
-@keyframes space {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(-100vh);
-    }
-}
 .auth-container {
     position: relative;
     width: 100%;
     max-width: 420px;
-    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
 }
 
