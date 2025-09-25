@@ -27,7 +27,7 @@ body {
 }
 
 .main-header {
-    padding: 2rem 2rem; /* Doubled the vertical padding from 1rem to 2rem */
+    padding: 1rem 1.5rem; /* Adjusted for better mobile view */
     display: flex;
     align-items: center;
     justify-content: space-between;

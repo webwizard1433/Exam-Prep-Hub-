@@ -1,5 +1,11 @@
 /* responsive.css */
 
+/* --- Flexible Images and Media --- */
+img, video, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
 /* --- General Mobile Adjustments (Apply to all pages) --- */
 @media (max-width: 768px) {
     body {
@@ -7,7 +13,7 @@
     }
 
     .main-content-wrapper, .main-content {
-        padding: 1rem; /* Reduce padding on mobile */
+        padding: 0.5rem; /* Further reduce padding on mobile */
     }
 
     h1 {
@@ -16,6 +22,18 @@
 
     h2 {
         font-size: 1.5rem;
+    }
+
+    .main-header {
+        padding: 0.5rem 1rem;
+    }
+
+    .page-title {
+        font-size: 1.2rem; /* Make header title smaller on mobile */
+    }
+
+    .main-content-wrapper {
+        padding-top: calc(var(--header-height) + 3rem); /* Adjust for mobile */
     }
 }
 
@@ -61,5 +79,15 @@
 
     .exam-grid {
         grid-template-columns: 1fr; /* Stack exam cards vertically */
+    }
+
+    .exam-main-card {
+        padding: 1rem;
+    }
+
+    .back-button {
+        margin: 0; /* Reset margin */
+        top: calc(var(--header-height) + 0.5rem);
+        left: 0.5rem;
     }
 }

@@ -32,7 +32,7 @@ body {
 
 .main-header {
     height: var(--header-height);
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -84,8 +84,9 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    position: relative;
-    margin: 1.5rem 0 0 2rem; /* Position it below the header */
+    position: absolute; /* Position relative to the wrapper */
+    top: calc(var(--header-height) + 1rem); /* Position it below the header */
+    left: 1.5rem;
     width: fit-content; /* Make it only as wide as its content */
     background-color: transparent;
     color: #94a3b8; /* Muted color */
@@ -310,7 +311,7 @@ body.menu-open .main-content-wrapper {
 .main-content-wrapper {
     flex-grow: 1;
     overflow-y: auto;
-    padding-top: var(--header-height); /* Add padding to push content below the fixed header */
+    padding-top: calc(var(--header-height) + 4rem); /* Add padding to push content below the fixed header and back button */
 }
 
 .exam-main-card {
