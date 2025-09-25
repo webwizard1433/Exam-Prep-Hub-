@@ -23,7 +23,7 @@ body {
     background: #0f172a; /* Static dark background */
     color: #e2e8f0; /* Set a light default text color for dark mode */    display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .main-header {
