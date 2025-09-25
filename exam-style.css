@@ -75,8 +75,8 @@ body {
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
+    top: calc(env(safe-area-inset-top, 0px) + (var(--header-height) / 2)); /* Center within the visible header area */
+    transform: translateY(-50%);
     right: 1.5rem;
 }
 

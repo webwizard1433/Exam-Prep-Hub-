@@ -78,8 +78,8 @@ body {
     border: 2px solid var(--primary-color);
     background-color: var(--sidebar-bg);
     position: absolute;
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
+    top: calc(env(safe-area-inset-top, 0px) + (var(--header-height) / 2)); /* Center within the visible header area */
+    transform: translateY(-50%);
     right: 1.5rem;
 }
 
