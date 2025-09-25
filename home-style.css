@@ -42,11 +42,11 @@ body {
     font-size: 1.75rem;
     font-weight: 600;
     letter-spacing: 1px;
-    width: 800px; /* Match exam-style.css */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: -1; /* Place it behind the menu button */
+    text-align: center;
 
     /* New stylish font and lightning effect */
     font-family: 'Brush Script MT', 'Brush Script Std', 'cursive'; /* A stylish, script-like font */

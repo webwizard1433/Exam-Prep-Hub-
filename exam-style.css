@@ -46,7 +46,6 @@ body {
     font-size: 1.75rem;
     font-weight: 600;
     letter-spacing: 1px;
-    width: 800px; /* Increased width */
     position: absolute;
     left: 50%;
     transform: translateX(-50%); /* This will keep it centered */
