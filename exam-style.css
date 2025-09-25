@@ -38,6 +38,7 @@ body {
     justify-content: space-between;
     background: var(--secondary-color);
     border-bottom: 1px solid var(--border-color);
+    padding-top: env(safe-area-inset-top); /* Add padding for the status bar */
     position: relative;
     z-index: 50;
 }
