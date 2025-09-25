@@ -27,7 +27,8 @@ body {
 }
 
 .main-header {
-    padding: 1rem 1.5rem; /* Adjusted for better mobile view */
+    height: var(--header-height);
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -321,6 +322,7 @@ body.menu-open .main-content-wrapper {
     flex-grow: 1;
     background-color: #1e293b; /* Lighter background for content area */
     padding-top: var(--header-height); /* Add padding to push content below the fixed header */
+    padding-bottom: env(safe-area-inset-bottom, 1rem); /* Add padding for the home bar */
     overflow-y: auto; /* Allow this wrapper to scroll */
 }
 

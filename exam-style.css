@@ -24,7 +24,7 @@ body {
     color: var(--primary-color);
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* --- Re-used Header and Side Menu Styles (from home-style.css) --- */
@@ -311,7 +311,8 @@ body.menu-open .main-content-wrapper {
 .main-content-wrapper {
     flex-grow: 1;
     overflow-y: auto;
-    padding-top: calc(var(--header-height) + 4rem); /* Add padding to push content below the fixed header and back button */
+    padding-top: calc(var(--header-height) + 4rem); /* Space for header and back button */
+    padding-bottom: env(safe-area-inset-bottom, 1rem); /* Add padding for the home bar */
 }
 
 .exam-main-card {
