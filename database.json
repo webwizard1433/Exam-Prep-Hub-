@@ -1,11 +1,11 @@
 {
     "users": [
         {
-            "id": "c36bd92d-d002-49bd-8f7c-114466d47ade",
+            "id": "bd8d8c4d-c83c-4598-afe8-72cd60078cff",
             "name": "Saurabh Kumar",
-            "email": "webwizard143@gmail.com",
-            "password": "$2a$10$m/iNZi2JzL9T8D1g2h3e4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t",
-            "createdAt": "2025-09-24T19:28:59.448Z"
+            "email": "careeriaf143@gmail.com",
+            "password": "$2a$10$DPJEP0KXkZJC3AI4VWWL4ubVrKbVx/Y/Uyxr73b6n5yV.jl6V/666",
+            "createdAt": "2025-09-25T03:43:18.644Z"
         }
     ],
     "content": [
@@ -429,8 +429,5 @@
             "exam": "upsc",
             "url": "https://drive.google.com/file/d/1Eg6o1cx4PhSbari9Zmq7AkK-q_KjjQqg/preview"
         }
-    ],
-    "admin": {
-        "password": "4gh4m01r"
-    }
+    ]
 }

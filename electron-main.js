@@ -8,7 +8,7 @@ autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 
 // IMPORTANT: Replace this with your actual Render application URL
-const RENDER_URL = 'https://exam-prep-hub.onrender.com';
+const RENDER_URL = 'https://exam-prep-hub.onrender.com/login.html';
 
 function createWindow() {
     // Create the browser window.

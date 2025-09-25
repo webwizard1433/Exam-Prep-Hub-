@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register - Exam Prep Hub</title>
+    <title>Welcome - Exam Prep Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" type="image/jpeg" href="https://st4.depositphotos.com/1842549/21099/i/450/depositphotos_210992656-stock-photo-success-icon.jpg">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,94 +11,67 @@
     <link rel="stylesheet" href="login-style.css">
 </head>
 <body>
-    <div class="background-shapes"></div>
-    <div class="form-container">
-        <div class="tab-header">
-            <button class="tab-link active" data-tab="student-login">Student</button>
-            <button class="tab-link" data-tab="admin-login">Admin</button>
+    <div class="auth-container">
+        <!-- Student View (contains both login and register) -->
+        <div id="student-view">
+            <div class="form-card active" id="login-view">
+                <h2>Sign In</h2>
+                <p>Welcome back! Please enter your details.</p>
+                <form>
+                    <div class="input-group">
+                        <input type="email" id="login-email" required>
+                        <label for="login-email">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="login-password" required>
+                        <label for="login-password">Password</label>
+                        <span class="toggle-password"></span>
+                    </div>
+                    <div class="form-footer">
+                        <a href="#" class="forgot-password-link">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                </form>
+                <p class="toggle-text">Don't have an account? <a href="#" id="show-register-link">Register</a></p>
+            </div>
+    
+            <!-- Registration Form -->
+            <div class="form-card" id="register-view">
+                <h2>Create Account</h2>
+                <p>Enter your details to start your journey.</p>
+                <form>
+                    <div class="input-group">
+                        <input type="text" id="register-name" required>
+                        <label for="register-name">Full Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="register-email" required>
+                        <label for="register-email">Email</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="register-password" required>
+                        <label for="register-password">Password</label>
+                        <span class="toggle-password"></span>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="confirm-password" required>
+                        <label for="confirm-password">Confirm Password</label>
+                        <span class="toggle-password"></span>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                </form>
+                <p class="toggle-text">Already have an account? <a href="#" id="show-login-link">Sign In</a></p>
+            </div>
         </div>
-
-        <!-- Student Login Form -->
-        <div class="form-card tab-content active" id="student-login">
-            <h2>Student Login</h2>
-            <p>Login to continue your journey.</p>
-            <form action="#">
-                <div class="input-group">
-                    <input type="email" id="login-email" required>
-                    <label for="login-email">Email</label>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="login-password" required>
-                    <label for="login-password">Password</label>
-                    <span class="toggle-password"></span>
-                </div>
-                <div class="form-footer">
-                    <a href="#" class="forgot-password-link">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn">Login</button>
-            </form>
-            <p class="toggle-text">Don't have an account? <a href="#" id="show-register">Register here</a></p>
-        </div>
-
-        <!-- Student Registration Form -->
-        <div class="form-card tab-content" id="student-register">
-            <h2>Create Student Account</h2>
-            <p>Get started with Exam Prep Hub today!</p>
-            <form action="#">
-                <div class="input-group">
-                    <input type="text" id="register-name" required>
-                    <label for="register-name">Full Name</label>
-                </div>
-                <div class="input-group">
-                    <input type="email" id="register-email" required>
-                    <label for="register-email">Email</label>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="register-password" required>
-                    <label for="register-password">Password</label>
-                    <span class="toggle-password"></span>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="confirm-password" required>
-                    <label for="confirm-password">Confirm Password</label>
-                    <span class="toggle-password"></span>
-                </div>
-                <div id="password-strength" class="password-strength-hidden">
-                    <p>Password must contain:</p>
-                    <ul id="strength-criteria">
-                        <li id="length">At least 8 characters</li>
-                        <li id="uppercase">One uppercase letter</li>
-                        <li id="number">One number</li>
-                    </ul>
-                </div>
-                <button type="submit" class="btn">Register</button>
-            </form>
-            <p class="toggle-text">Already have an account? <a href="#" id="show-login">Login here</a></p>
-        </div>
-
-        <!-- Admin Login Form -->
-        <div class="form-card tab-content" id="admin-login">
-            <h2>Admin Login</h2>
-            <p>Enter the password to access the dashboard.</p>
-            <form id="admin-login-form">
-                <div class="input-group">
-                    <input type="password" id="admin-password" required>
-                    <label for="admin-password">Password</label>
-                    <span class="toggle-password"></span>
-                </div>
-                <button type="submit" class="btn">Access Dashboard</button>
-            </form>
-        </div>
-
     </div>
 
-    <!-- Forgot Password Modal (no changes) -->
+    <!-- Forgot Password Modal -->
     <div class="modal-overlay hidden" id="forgot-password-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
             <h2>Reset Password</h2>
             <p>Enter your email address and we'll send you a link to reset your password.</p>
-            <form action="#">
+            <form>
                 <div class="input-group">
                     <input type="email" id="reset-email" required>
                     <label for="reset-email">Email Address</label>
