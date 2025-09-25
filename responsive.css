@@ -91,3 +91,10 @@ img, video, iframe {
         left: 0.5rem;
     }
 }
+
+/* --- New Exam Page Layout --- */
+@media (max-width: 900px) {
+    .exam-page-grid {
+        grid-template-columns: 1fr;
+    }
+}
